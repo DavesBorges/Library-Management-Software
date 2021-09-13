@@ -122,5 +122,10 @@ const transactions: TransactionData[] = [
   },
 ];
 
-export const getAllBooks = (): BookData[] =>
-  books.filter((book) => book.copyrightDate !== 0);
+const wait = (ms: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+export const getAllBooks = async (): Promise<BookData[]> => {
+  await wait(500);
+  return books.filter((book) => book.copyrightDate !== 0);
+};
