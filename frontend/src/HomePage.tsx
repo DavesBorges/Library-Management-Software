@@ -1,14 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { BookList } from './BookList';
 import { BookData, getAllBooks } from './LibraryData';
 import { Page } from './Page';
 import { PageTitle } from './PageTitle';
 import { PrimaryButton } from './Styles';
 
-export const HomePage = () => {
+export const HomePage: FC<RouteComponentProps> = ({ history }) => {
   const [books, setBooks] = useState<BookData[] | null>(null);
   const [booksLoading, setBooksLoading] = useState(true);
   useEffect(() => {
@@ -23,7 +24,7 @@ export const HomePage = () => {
   const [count, setCount] = useState(0);
 
   const handleAddBookClick = () => {
-    console.log('TODO - move to the Add Book page');
+    history.push('/add_book');
   };
   return (
     <Page>
