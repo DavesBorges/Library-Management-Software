@@ -2,6 +2,7 @@ export interface BookData {
   bookId: number;
   title: string;
   authors: string[];
+  sinopse?: string;
   copyrightDate: number;
   isbn: string;
   language: string;
@@ -38,6 +39,8 @@ const books: BookData[] = [
   {
     bookId: 1,
     title: 'The C Programming Language',
+    sinopse:
+      'This second editon describes C as defined by the ANSI standard. This book is meant to help the reader learn how to program in C. The book assumes some familiarity with basic programming concepts like variables, assignment statements, loops, and functions. A novice programmer should be able to read along and pick up the language.',
     authors: ['Brian Wilson Kernighan', 'Dennis MacAlistair Ritchie'],
     copyrightDate: 1988,
     isbn: '0131103709',
@@ -71,6 +74,8 @@ const books: BookData[] = [
     bookId: 3,
     title: 'IT',
     authors: ['Stephen King'],
+    sinopse:
+      'They were seven teenagers when they first stumbled upon the horror. Now they were grown-up men and women who had gone out into the big world to gain success and happiness. But none of them could withstand the force that drew them back to Derry, Maine to face the nightmare without an end and the evil without a name...',
     copyrightDate: 1987,
     language: 'english',
     genre: ['Thriller', 'Horror'],
@@ -128,4 +133,10 @@ const wait = (ms: number): Promise<void> => {
 export const getAllBooks = async (): Promise<BookData[]> => {
   await wait(500);
   return books.filter((book) => book.copyrightDate !== 0);
+};
+
+export const getBook = async (bookId: number): Promise<BookData | null> => {
+  await wait(500);
+  let results = books.filter((book) => book.bookId === bookId);
+  return results.length !== 0 ? results[0] : null;
 };
